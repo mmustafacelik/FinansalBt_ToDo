@@ -82,7 +82,7 @@ class _TaskpageState extends State<Taskpage> {
                         yazi: "2.yazi",
                       ),
                       Todo(
-                        yazi: "Eylül <3 MustikEylül ",
+                        yazi: "3.yazi ",
                       ),
                       Todo(),
                       Todo(),
