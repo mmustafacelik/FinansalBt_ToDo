@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_project/screens/taskpage.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class TaskCardWidget extends StatelessWidget {
@@ -7,54 +8,65 @@ class TaskCardWidget extends StatelessWidget {
   const TaskCardWidget({this.title, this.description});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24.0),
-      margin: EdgeInsets.only(
-        bottom: 10,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xffE1BEE7),//Görev Listesi homepagedeki renkler
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Column(
-        children: [
-          Text(
-            title ?? "(İsimsiz Başlık)",
-            style: const TextStyle(
-                color: Color(0xff212121),
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 15.0,
+    return
+      InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Taskpage(),
             ),
-            child: Text(
-              description ?? ("Yapılacak iş eklenmedi."),
-              style: const TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 16.0,
-                color: Color(0xFF616161),
-                height: 1.5,
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24.0),
+          margin: EdgeInsets.only(
+            bottom: 10,
+          ),
+          decoration: BoxDecoration(
+            color: const Color(0xffE1BEE7),//Görev Listesi homepagedeki renkler
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Column(
+            children: [
+              Text(
+                title ?? "(İsimsiz Başlık)",
+                style: const TextStyle(
+                    color: Color(0xff212121),
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 15.0,
+                ),
+                child: Text(
+                  description ?? ("Yapılacak iş eklenmedi."),
+                  style: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16.0,
+                    color: Color(0xFF616161),
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        )
+      );
   }
 }
 
 class Todo extends StatefulWidget {
   Todo(
       {Key? key,
-      this.yazi,
+      this.text,
       this.isDone,
       this.checkvalue = false,
       this.isSwitched = false})
       : super(key: key);
-  final String? yazi;
+  final String? text;
   final bool? isDone;
   bool isSwitched = false;
   bool checkvalue = false;
@@ -84,7 +96,7 @@ class _TodoState extends State<Todo> {
             },
           ),
           Text(
-            widget.yazi ?? "(isimsiz görev)",
+            widget.text ?? "(isimsiz görev)",
             style: TextStyle(
               color: Color(0xff5D4037),
               fontSize: 16.0,
@@ -100,7 +112,7 @@ class _TodoState extends State<Todo> {
                   print(widget.isSwitched);
                 });
               },
-              activeTrackColor: Color(0xff03A9F4),
+              activeTrackColor: Color(0xff03a9f4),
               activeColor: Colors.blue,
               activeThumbImage: AssetImage("assets/images/cloudy_aktif.png"),
               inactiveThumbImage:

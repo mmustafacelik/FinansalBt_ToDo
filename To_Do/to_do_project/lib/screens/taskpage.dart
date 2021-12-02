@@ -76,13 +76,13 @@ class _TaskpageState extends State<Taskpage> {
                       child: ListView(
                     children: [
                       Todo(
-                        yazi: "1.yazi",
+                        text: "1.yazi",
                       ),
                       Todo(
-                        yazi: "2.yazi",
+                        text: "2.yazi",
                       ),
                       Todo(
-                        yazi: "3.yazi ",
+                        text: "3.yazi ",
                       ),
                       Todo(),
                       Todo(),

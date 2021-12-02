@@ -5,6 +5,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_project/screens/homepage.dart';
 
 void main() async {
+  // Avoid errors caused by flutter upgrade.
+  // Importing 'package:flutter/widgets.dart' is required.
+  WidgetsFlutterBinding.ensureInitialized();
+  // Open the database and store the reference.
+  /*var database = DatabaseHelper();
+  
+  var tito = Task(title: "owo");
+  await database.insertTask(tito);
+  
+  var ll = await database.tasks();
+  for(final e in ll){
+    print(e.id);
+    print(e.title);
+  }*/
+
   runApp(const MyApp());
 }
 
