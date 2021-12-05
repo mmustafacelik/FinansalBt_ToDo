@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_project/models/todo.dart' as models;
 import 'package:to_do_project/screens/homepage.dart';
 import 'package:to_do_project/widgets.dart';
+import 'package:to_do_project/models/task.dart';
+import 'package:to_do_project/helpers.dart';
 
-class Taskpage extends StatefulWidget {
-  Taskpage({Key? key}) : super(key: key);
+class Todopage extends StatefulWidget {
+  late Task? task;
+
+  Todopage({Key? key, Task? this.task}) : super(key: key);
 
   @override
-  _TaskpageState createState() => _TaskpageState();
+  _TodopageState createState() => _TodopageState();
 }
 
-class _TaskpageState extends State<Taskpage> {
+class _TodopageState extends State<Todopage> {
+
+  late Future<List<models.Todo>> futureTodo;
+
+  @override
+  void initState() {
+    super.initState();
+    futureTodo = GetTodos(widget.task!.id!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +57,8 @@ class _TaskpageState extends State<Taskpage> {
                             onSubmitted: (value) {
                               print("Başlık:$value");
                             },
-                            decoration: const InputDecoration(
-                              hintText: "Görev başlığı girebilirsiniz...",
+                            decoration: InputDecoration(
+                              hintText: widget.task?.title,
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
@@ -61,10 +75,9 @@ class _TaskpageState extends State<Taskpage> {
                     padding: EdgeInsets.only(
                       bottom: 12.0,
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
-                        hintText:
-                            "Görevle ilgili küçük notları buraya yazabilirsiniz.",
+                        hintText: widget.task?.description,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 24.0,
@@ -73,41 +86,66 @@ class _TaskpageState extends State<Taskpage> {
                     ),
                   ),
                   Expanded(
-                      child: ListView(
-                    children: [
-                      Todo(
-                        text: "1.yazi",
-                      ),
-                      Todo(
-                        text: "2.yazi",
-                      ),
-                      Todo(
-                        text: "3.yazi ",
-                      ),
-                      Todo(),
-                      Todo(),
-                      Todo(),
-                    ],
-                  ))
+                    child: FutureBuilder<List<models.Todo>>(
+                        future: futureTodo,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<models.Todo> todos = snapshot.data!;
+                            return ListView.builder(
+                              itemCount: todos.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Todo(todo: todos[index]);
+                              },
+                            );
+                          }
+                          else if(snapshot.hasError) {
+                            return Text('${snapshot.error}');
+                          }
+                          // By default, show a loading spinner.
+                          return const CircularProgressIndicator();
+                        }
+                    ),
+                  )
                 ],
               ),
               Positioned(
-                right: 10.0,
+                left: 10.0,
                 bottom: 10.0,
                 child: FloatingActionButton(
-                  backgroundColor: Color(0xff19C8F6),
+                  heroTag: 'delTaskBtn',
+                  backgroundColor: Color(0xffff0303),
                   child: const Icon(
                     Icons.delete_forever,
                     size: 25.0,
                     color: Color(0xffFFECB3),
                   ),
                   onPressed: () {
+                    DeleteTask(widget.task!.id!);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Homepage(),
                       ),
                     );
+                  },
+                ),
+              ),
+              Positioned(
+                right: 10.0,
+                bottom: 10.0,
+                child: FloatingActionButton(
+                  heroTag: 'addTodoBtn',
+                  backgroundColor: Color(0xff19C8F6),
+                  child: const Icon(
+                    Icons.add,
+                    size: 25.0,
+                    color: Color(0xffFFECB3),
+                  ),
+                  onPressed: () {
+                    CreateTodo(widget.task!.id!);
+                    setState(() {
+                      futureTodo = GetTodos(widget.task!.id!);
+                    });
                   },
                 ),
               )

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/widgets.dart';
-import 'package:to_do_project/database.dart';
 import 'package:to_do_project/helpers.dart';
 import 'package:to_do_project/models/task.dart';
 
@@ -18,7 +17,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    futureTask = DatabaseHelper().tasks();
+    futureTask = getTasks();
   }
 
   @override
@@ -34,7 +33,7 @@ class _HomepageState extends State<Homepage> {
         onPressed: () {
           CreateTask();
           setState(() {
-            futureTask = DatabaseHelper().tasks();
+            futureTask = getTasks();
           });
         },
       ),
@@ -71,8 +70,7 @@ class _HomepageState extends State<Homepage> {
                             itemCount: tasks.length,
                             itemBuilder: (BuildContext context, int index) {
                               return TaskCardWidget(
-                                  title: tasks[index].title,
-                                  description: "Merhabalar buraya ana başlık altında yapmanız gerekenleri yazabilirsiniz"
+                                  task: tasks[index],
                               );
                             },
                           );
@@ -84,15 +82,6 @@ class _HomepageState extends State<Homepage> {
                         return const CircularProgressIndicator();
                       }
                     ),
-                    /*child: ListView(
-                      children: [
-                        TaskCardWidget(
-                          title: "Birinci",
-                          description:
-                              "Merhabalar buraya ana başlık altında yapmanız gerekenleri yazabilirsiniz",
-                        ),
-                      ],
-                    ),*/
                   )
                 ],
               ),

@@ -1,14 +1,18 @@
 import 'package:to_do_project/models/db.dart';
 
-class Task extends DatabaseModel{
+class Todo extends DatabaseModel{
   final int? id;
+  final int? taskId;
   String? title;
+  int isDone;
   String? description;
 
-  Task({
+  Todo({
     this.id,
+    this.taskId,
     this.title,
-    this.description,
+    this.isDone = 0,
+    this.description
   });
 
   // Convert a Task into a Map. The keys must correspond to the names of the
@@ -16,8 +20,10 @@ class Task extends DatabaseModel{
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'taskid': taskId,
       'title': title,
-      'description': description,
+      'isDone': isDone,
+      'description': description
     };
   }
 }

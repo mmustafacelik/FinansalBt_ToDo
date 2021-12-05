@@ -2,12 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do_project/database.dart';
+import 'package:to_do_project/helpers.dart';
 import 'package:to_do_project/screens/homepage.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
+
   // Open the database and store the reference.
   /*var database = DatabaseHelper();
   
