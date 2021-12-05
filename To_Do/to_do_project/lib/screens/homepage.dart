@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/widgets.dart';
-import 'package:to_do_project/helpers.dart';
+import 'package:to_do_project/helpers/task.dart';
 import 'package:to_do_project/models/task.dart';
+import 'package:to_do_project/screens/todos.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -69,8 +70,18 @@ class _HomepageState extends State<Homepage> {
                           return ListView.builder(
                             itemCount: tasks.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return TaskCardWidget(
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Todopage(task: tasks[index]),
+                                    ),
+                                  ).then((value) => setState(() {}));
+                                },
+                                child: TaskCardWidget(
                                   task: tasks[index],
+                                )
                               );
                             },
                           );

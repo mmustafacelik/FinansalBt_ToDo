@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_project/database.dart';
 import 'package:to_do_project/models/todo.dart' as models;
 import 'package:to_do_project/screens/homepage.dart';
 import 'package:to_do_project/widgets.dart';
 import 'package:to_do_project/models/task.dart';
-import 'package:to_do_project/helpers.dart';
+import 'package:to_do_project/helpers/todo.dart';
+import 'package:to_do_project/helpers/task.dart';
 
 class Todopage extends StatefulWidget {
   late Task? task;
@@ -26,6 +28,7 @@ class _TodopageState extends State<Todopage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -48,18 +51,22 @@ class _TodopageState extends State<Todopage> {
                             onPressed: () {
                               Navigator.pop(
                                 context,
+                                true
                               );
                             },
                           ),
                         ),
                         Expanded(
                           child: TextField(
+                            maxLength: 50,
                             onSubmitted: (value) {
-                              print("Başlık:$value");
+                              widget.task!.title = value;
+                              UpdateTask(widget.task!);
                             },
                             decoration: InputDecoration(
                               hintText: widget.task?.title,
                               border: InputBorder.none,
+                              counterText: '',
                             ),
                             style: TextStyle(
                               fontSize: 24,
@@ -76,6 +83,11 @@ class _TodopageState extends State<Todopage> {
                       bottom: 12.0,
                     ),
                     child: TextField(
+                      maxLength: 150,
+                      onSubmitted: (value) {
+                        widget.task!.description = value;
+                        UpdateTask(widget.task!);
+                      },
                       decoration: InputDecoration(
                         hintText: widget.task?.description,
                         border: InputBorder.none,
@@ -108,47 +120,52 @@ class _TodopageState extends State<Todopage> {
                   )
                 ],
               ),
-              Positioned(
-                left: 10.0,
-                bottom: 10.0,
-                child: FloatingActionButton(
-                  heroTag: 'delTaskBtn',
-                  backgroundColor: Color(0xffff0303),
-                  child: const Icon(
-                    Icons.delete_forever,
-                    size: 25.0,
-                    color: Color(0xffFFECB3),
+              Visibility(
+                visible: !isKeyboardOpen,
+                child: Positioned(
+                  left: 10.0,
+                  bottom: 10.0,
+                  child: FloatingActionButton(
+                    heroTag: 'delTaskBtn',
+                    backgroundColor: Color(0xffff0303),
+                    child: const Icon(
+                      Icons.delete_forever,
+                      size: 25.0,
+                      color: Color(0xffFFECB3),
+                    ),
+                    onPressed: () {
+                      DeleteTask(widget.task!.id!);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Homepage(),
+                        ),
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    DeleteTask(widget.task!.id!);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Homepage(),
-                      ),
-                    );
-                  },
                 ),
               ),
-              Positioned(
-                right: 10.0,
-                bottom: 10.0,
-                child: FloatingActionButton(
-                  heroTag: 'addTodoBtn',
-                  backgroundColor: Color(0xff19C8F6),
-                  child: const Icon(
-                    Icons.add,
-                    size: 25.0,
-                    color: Color(0xffFFECB3),
+              Visibility(
+                visible: !isKeyboardOpen,
+                child: Positioned(
+                  right: 10.0,
+                  bottom: 10.0,
+                  child: FloatingActionButton(
+                    heroTag: 'addTodoBtn',
+                    backgroundColor: Color(0xff19C8F6),
+                    child: const Icon(
+                      Icons.add,
+                      size: 25.0,
+                      color: Color(0xffFFECB3),
+                    ),
+                    onPressed: () {
+                      CreateTodo(widget.task!.id!);
+                      setState(() {
+                        futureTodo = GetTodos(widget.task!.id!);
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    CreateTodo(widget.task!.id!);
-                    setState(() {
-                      futureTodo = GetTodos(widget.task!.id!);
-                    });
-                  },
-                ),
-              )
+              ))
             ],
           ),
         ),
