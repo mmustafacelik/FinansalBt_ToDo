@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_project/database.dart';
 import 'package:to_do_project/models/todo.dart' as models;
 import 'package:to_do_project/screens/homepage.dart';
-import 'package:to_do_project/widgets.dart';
+import 'package:to_do_project/widgets/todo_item.dart';
 import 'package:to_do_project/models/task.dart';
 import 'package:to_do_project/helpers/todo.dart';
 import 'package:to_do_project/helpers/task.dart';
@@ -24,6 +23,12 @@ class _TodopageState extends State<Todopage> {
   void initState() {
     super.initState();
     futureTodo = GetTodos(widget.task!.id!);
+  }
+
+  refresh() {
+    setState(() {
+      futureTodo = GetTodos(widget.task!.id!);
+    });
   }
 
   @override
@@ -91,6 +96,7 @@ class _TodopageState extends State<Todopage> {
                       decoration: InputDecoration(
                         hintText: widget.task?.description,
                         border: InputBorder.none,
+                        counterText: '',
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 24.0,
                         ),
@@ -106,7 +112,7 @@ class _TodopageState extends State<Todopage> {
                             return ListView.builder(
                               itemCount: todos.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return Todo(todo: todos[index]);
+                                return Todo(todo: todos[index], refreshParentState: refresh,);
                               },
                             );
                           }

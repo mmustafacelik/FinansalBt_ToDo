@@ -1,8 +1,16 @@
 import 'package:to_do_project/database.dart';
 import 'package:to_do_project/models/todo.dart';
 
-void CreateTodo(int taskId) async{
+void CreateTodo(int taskId) async {
   await DatabaseHelper().insertRecord('todos', Todo(title: "1. iş", description: "Örnek açıklama", taskId: taskId));
+}
+
+void DeleteTodo(int id) async {
+  await DatabaseHelper().deleteRecord('todos', id);
+}
+
+void UpdateTodo(Todo todo) async {
+  await DatabaseHelper().updateRecord('todos', todo);
 }
 
 Future<List<Todo>> GetTodos(int taskid) async {

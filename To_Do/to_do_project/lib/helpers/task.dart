@@ -17,11 +17,11 @@ Future<List<Task>> getTasks() async {
   });
 }
 
-void CreateTask() async{
+void CreateTask() async {
   await DatabaseHelper().insertRecord('tasks', Task(title: "Yeni İş", description: "Örnek iş açıklaması"));
 }
 
-void DeleteTask(int id) async{
+void DeleteTask(int id) async {
   await DatabaseHelper().deleteRecord('tasks', id);
 }
 
