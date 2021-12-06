@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),
+        unselectedWidgetColor: Color(0xff686868),
       ),
       home: const Homepage(),
     );

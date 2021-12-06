@@ -24,8 +24,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff121212),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff19C8F6),
+        backgroundColor: Color(0xff554cff),
         child: const Icon(
           Icons.add,
           size: 40.0,
@@ -44,7 +45,7 @@ class _HomepageState extends State<Homepage> {
           padding: const EdgeInsets.symmetric(
             horizontal: 24.0,
           ),
-          color: const Color(0xFF80cbc4), //ARKAPLANI SARI YAPAN KOD
+          color: const Color(0xff121212), //ARKAPLANI SARI YAPAN KOD
           child: Stack(
             children: [
               Column(
@@ -58,7 +59,7 @@ class _HomepageState extends State<Homepage> {
                       top: 10.0,
                     ),
                     child: const Image(
-                      image: AssetImage('assets/images/logo_3.png'),
+                      image: AssetImage('assets/images/test.png'),
                     ),
                   ),
                   Expanded(
@@ -79,7 +80,7 @@ class _HomepageState extends State<Homepage> {
                                     ),
                                   ).then((value) => setState(() {}));
                                 },
-                                child: TaskCardWidget(
+                                child: TaskCard(
                                   task: tasks[index],
                                 )
                               );

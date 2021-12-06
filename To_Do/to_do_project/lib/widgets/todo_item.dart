@@ -32,7 +32,7 @@ class _TodoState extends State<Todo> {
           Expanded(
             child: Checkbox(
               checkColor: Colors.white,
-              activeColor: Colors.green,
+              activeColor: Color(0xff564cff),
               value: widget.todo?.isDone != 0 ? true : false,
               onChanged: (value) {
                 setState(() {
@@ -54,12 +54,15 @@ class _TodoState extends State<Todo> {
                 },
                 decoration: InputDecoration(
                   hintText: widget.todo?.title ?? "(isimsiz görev)",
+                  hintStyle: TextStyle(
+                    color: Color(0xff686868),
+                  ),
                   border: InputBorder.none,
                   counterText: '',
                 ),
                 style: TextStyle(
-                  color: Color(0xff5D4037),
-                  fontSize: 16.0,
+                  color: Color(0xff686868),
+                  fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -68,6 +71,7 @@ class _TodoState extends State<Todo> {
           Expanded(
             child: IconButton(
               padding: const EdgeInsets.all(4),
+              color: Color(0xff686868),
               icon: const Icon(Icons.delete),
               tooltip: 'Increase volume by 10',
               onPressed: () {

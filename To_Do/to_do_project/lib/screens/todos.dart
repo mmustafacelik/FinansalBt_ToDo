@@ -37,6 +37,7 @@ class _TodopageState extends State<Todopage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          color: const Color(0xff121212),
           child: Stack(
             children: [
               Column(
@@ -52,7 +53,7 @@ class _TodopageState extends State<Todopage> {
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: BackButton(
-                            color: Colors.red,
+                            color: Color(0xffff4181),
                             onPressed: () {
                               Navigator.pop(
                                 context,
@@ -70,13 +71,16 @@ class _TodopageState extends State<Todopage> {
                             },
                             decoration: InputDecoration(
                               hintText: widget.task?.title,
+                              hintStyle: TextStyle(
+                                color: Color(0xff686868),
+                              ),
                               border: InputBorder.none,
                               counterText: '',
                             ),
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xff607D8B),
+                              color: Color(0xff686868),
                             ),
                           ),
                         )
@@ -95,11 +99,18 @@ class _TodopageState extends State<Todopage> {
                       },
                       decoration: InputDecoration(
                         hintText: widget.task?.description,
+                        hintStyle: TextStyle(
+                          color: Color(0xff616161),
+                        ),
                         border: InputBorder.none,
                         counterText: '',
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 24.0,
                         ),
+                      ),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xff686868),
                       ),
                     ),
                   ),
@@ -133,7 +144,7 @@ class _TodopageState extends State<Todopage> {
                   bottom: 10.0,
                   child: FloatingActionButton(
                     heroTag: 'delTaskBtn',
-                    backgroundColor: Color(0xffff0303),
+                    backgroundColor: Color(0xffff4181),
                     child: const Icon(
                       Icons.delete_forever,
                       size: 25.0,
@@ -158,7 +169,7 @@ class _TodopageState extends State<Todopage> {
                   bottom: 10.0,
                   child: FloatingActionButton(
                     heroTag: 'addTodoBtn',
-                    backgroundColor: Color(0xff19C8F6),
+                    backgroundColor: Color(0xff564cff),
                     child: const Icon(
                       Icons.add,
                       size: 25.0,
