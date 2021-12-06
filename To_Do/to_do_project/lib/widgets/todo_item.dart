@@ -22,24 +22,6 @@ class _TodoState extends State<Todo> {
 
   @override
   Widget build(BuildContext context) {
-    var todoId = widget.todo!.id!;
-    const List<String> choices = <String>[
-      'Edit',
-      'Delete',
-    ];
-
-    void choiceAction(String choice){
-      String action = choice.split(":")[0];
-      int? todoId = int.tryParse(choice.split(":")[1]);
-
-      if(action == 'Edit'){
-        print('Edit:$todoId');
-      }else {
-        DeleteTodo(todoId!);
-        widget.refreshParentState();
-      }
-    }
-
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 10.0,
@@ -56,7 +38,6 @@ class _TodoState extends State<Todo> {
                 setState(() {
                   widget.todo?.isDone = value! ? 1 : 0;
                   UpdateTodo(widget.todo!);
-                  print(widget.todo?.isDone);
                 });
               },
             ),
@@ -65,8 +46,17 @@ class _TodoState extends State<Todo> {
             flex: 7,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text(
-                widget.todo?.title ?? "(isimsiz görev)",
+              child: TextField(
+                maxLength: 100,
+                onSubmitted: (value) {
+                  widget.todo?.title = value;
+                  UpdateTodo(widget.todo!);
+                },
+                decoration: InputDecoration(
+                  hintText: widget.todo?.title ?? "(isimsiz görev)",
+                  border: InputBorder.none,
+                  counterText: '',
+                ),
                 style: TextStyle(
                   color: Color(0xff5D4037),
                   fontSize: 16.0,
@@ -75,16 +65,45 @@ class _TodoState extends State<Todo> {
               ),
             )
           ),
-          /*Expanded(
+          Expanded(
             child: IconButton(
-              icon: const Icon(Icons.more_vert),
+              padding: const EdgeInsets.all(4),
+              icon: const Icon(Icons.delete),
               tooltip: 'Increase volume by 10',
               onPressed: () {
-                print('uwu');
+                DeleteTodo(widget.todo!.id!);
+                widget.refreshParentState();
               },
             ),
-          ),*/
-          Expanded(
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*
+var todoId = widget.todo!.id!;
+const List<String> choices = <String>[
+      'Edit',
+      'Delete',
+    ];
+
+void choiceAction(String choice){
+      String action = choice.split(":")[0];
+      int? todoId = int.tryParse(choice.split(":")[1]);
+
+      if(action == 'Edit'){
+        print('Edit:$todoId');
+      }else {
+        DeleteTodo(todoId!);
+        widget.refreshParentState();
+      }
+    }
+*/
+
+/*
+Expanded(
             child: PopupMenuButton<String>(
               onSelected: choiceAction,
               itemBuilder: (BuildContext context){
@@ -97,8 +116,4 @@ class _TodoState extends State<Todo> {
               },
             )
           ),
-        ],
-      ),
-    );
-  }
-}
+ */

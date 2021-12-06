@@ -18,7 +18,7 @@ Future<List<Task>> getTasks() async {
 }
 
 void CreateTask() async {
-  await DatabaseHelper().insertRecord('tasks', Task(title: "Yeni İş", description: "Örnek iş açıklaması"));
+  await DatabaseHelper().insertRecord('tasks', Task(title: "Yeni Görev", description: "Örnek görev açıklaması"));
 }
 
 void DeleteTask(int id) async {
