@@ -12,7 +12,8 @@ Future<List<Task>> getTasks() async {
     return Task(
         id: maps[i]['id'],
         title: maps[i]['title'],
-        description: maps[i]['description']
+        description: maps[i]['description'],
+        isActive: maps[i]['isActive']
     );
   });
 }

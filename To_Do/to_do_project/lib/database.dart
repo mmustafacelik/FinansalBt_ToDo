@@ -7,7 +7,7 @@ import 'dart:async';
 class DatabaseHelper {
   late final Future<Database> connection;
 
-  static const tableTask = 'CREATE TABLE tasks(id INTEGER PRIMARY KEY NOT NULL, title TEXT, description TEXT)';
+  static const tableTask = 'CREATE TABLE tasks(id INTEGER PRIMARY KEY NOT NULL, title TEXT, description TEXT, isActive BOOLEAN NOT NULL CHECK (isActive IN (0,1)))';
   static const tableTodo = 'CREATE TABLE todos('
       'id INTEGER PRIMARY KEY NOT NULL,'
       'title TEXT,'
@@ -41,7 +41,7 @@ class DatabaseHelper {
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
-      join(await getDatabasesPath(), 'tasks_databasev21.db'),
+      join(await getDatabasesPath(), 'tasks_databasev26.db'),
       // When the database is first created, create a table to store tasks.
       onConfigure: _onConfigure,
       onCreate: (db, version) async{

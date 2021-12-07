@@ -3,11 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_project/screens/homepage.dart';
+import 'package:to_do_project/notification_service.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init();
+
   runApp(const MyApp());
 }
 

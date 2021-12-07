@@ -3,6 +3,7 @@ import 'package:to_do_project/widgets/task_card.dart';
 import 'package:to_do_project/helpers/task.dart';
 import 'package:to_do_project/models/task.dart';
 import 'package:to_do_project/screens/todos.dart';
+import 'package:to_do_project/notification_service.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _HomepageState extends State<Homepage> {
           setState(() {
             futureTask = getTasks();
           });
+          NotificationService().showNotifications();
         },
       ),
       body: SafeArea(

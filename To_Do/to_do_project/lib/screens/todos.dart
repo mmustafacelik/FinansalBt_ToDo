@@ -74,12 +74,10 @@ class _TodopageState extends State<Todopage> {
                               hintStyle: TextStyle(
                                 color: Color(0xff686868),
                               ),
-                              border: InputBorder.none,
                               counterText: '',
                             ),
                             style: TextStyle(
                               fontSize: 24,
-                              fontWeight: FontWeight.bold,
                               color: Color(0xff686868),
                             ),
                           ),
@@ -109,7 +107,7 @@ class _TodopageState extends State<Todopage> {
                         ),
                       ),
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: Color(0xff686868),
                       ),
                     ),

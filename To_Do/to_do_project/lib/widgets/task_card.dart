@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/models/task.dart';
+import 'package:to_do_project/helpers/task.dart';
 
 
 class TaskCard extends StatefulWidget {
@@ -33,8 +34,8 @@ class _TaskCardState extends State<TaskCard> {
               widget.task?.title ?? "(İsimsiz Başlık)",
               style: const TextStyle(
                   color: Color(0xff686868),
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 20.0,
+              ),
               textAlign: TextAlign.center,
             ),
             Padding(
@@ -45,7 +46,7 @@ class _TaskCardState extends State<TaskCard> {
                 widget.task?.description ?? (""),
                 style: const TextStyle(
                   fontStyle: FontStyle.italic,
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   color: Color(0xFF616161),
                   height: 1.5,
                 ),
@@ -55,9 +56,12 @@ class _TaskCardState extends State<TaskCard> {
               child: Align (
                 alignment: Alignment.centerRight,
                 child: Switch(
-                  value: true,
+                  value: widget.task!.isActive != 0 ? true : false,
                   onChanged: (value) {
+                    widget.task!.isActive = value ? 1 : 0;
                     setState(() {
+                      UpdateTask(widget.task!);
+                      print('calisti');
                     });
                   },
                   activeTrackColor: Color(0xff554cff),
