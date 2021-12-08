@@ -5,6 +5,8 @@ import 'package:to_do_project/helpers/location.dart';
 import 'package:to_do_project/models/task.dart';
 import 'package:to_do_project/screens/todos.dart';
 import 'package:to_do_project/notification_service.dart';
+import 'package:to_do_project/helpers/weather.dart';
+
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -39,8 +41,9 @@ class _HomepageState extends State<Homepage> {
           setState(() {
             futureTask = getTasks();
           });
-          NotificationService().showNotifications();
-          await getCityName();
+          var city = await getCityName();
+          var temperature = await fetchWeather(city);
+          NotificationService().showNotifications(temperature);
         },
       ),
       body: SafeArea(

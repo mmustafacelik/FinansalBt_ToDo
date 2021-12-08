@@ -42,12 +42,12 @@ Future<Position> determinePosition() async {
   return await Geolocator.getCurrentPosition();
 }
 
-Future<List<Placemark>> getCityName() async {
+Future<String> getCityName() async {
   var position = await determinePosition();
-  var l = await placemarkFromCoordinates(
+  var placemark = await placemarkFromCoordinates(
     position.latitude,
     position.longitude,
   );
-  print(l[0].administrativeArea);
-  return l;
+
+  return placemark[0].administrativeArea!;
 }

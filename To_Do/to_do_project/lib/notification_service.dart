@@ -42,11 +42,11 @@ class NotificationService {
     );
   }
 
-  Future<void> showNotifications() async {
+  Future<void> showNotifications(String temperature) async {
     await flutterLocalNotificationsPlugin.show(
       0,
-      'Notification Title',
-      'This is the Notification Body',
+      'Aktif işiniz var',
+      'Hava şu an $temperature',
       platformChannelSpecifics,
       payload: 'Notification Payload',
     );
