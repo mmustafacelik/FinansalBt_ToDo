@@ -3,13 +3,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_project/screens/homepage.dart';
+import 'package:to_do_project/helpers/task.dart';
+import 'package:to_do_project/helpers/weather.dart';
+import 'package:to_do_project/helpers/location.dart';
 import 'package:to_do_project/notification_service.dart';
+import 'package:cron/cron.dart';
+
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
+
+  var cron = new Cron();
+  cron.schedule(new Schedule.parse('0 */1 * * *'), () async {
+    var activeTaskExist = await ActiveTaskExist();
+    if(activeTaskExist) {
+      var city = await getCityName();
+      var temperature = await fetchWeather(city);
+      NotificationService().showNotifications(temperature);
+    }
+  });
+
+
 
   runApp(const MyApp());
 }

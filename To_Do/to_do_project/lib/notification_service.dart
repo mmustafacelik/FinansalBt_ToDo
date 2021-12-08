@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+
 class NotificationService {
   //Singleton pattern
   static final NotificationService _notificationService =
@@ -25,7 +26,7 @@ class NotificationService {
   static const NotificationDetails platformChannelSpecifics =
   NotificationDetails(
       android: _androidNotificationDetails,
-      );
+  );
 
   Future<void> init() async {
     //Initialization Settings for Android
@@ -51,5 +52,4 @@ class NotificationService {
       payload: 'Notification Payload',
     );
   }
-
 }

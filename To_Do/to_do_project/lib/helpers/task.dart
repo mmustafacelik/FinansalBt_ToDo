@@ -30,4 +30,14 @@ void UpdateTask(Task task) async {
   await DatabaseHelper().updateRecord('tasks', task);
 }
 
+Future<bool> ActiveTaskExist() async {
+  var tasks = await getTasks();
+  for (var task in tasks) {
+    if(task.isActive == 1) {
+      return true;
+    }
+  }
+  return false;
+}
+
 
