@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/widgets/task_card.dart';
 import 'package:to_do_project/helpers/task.dart';
+import 'package:to_do_project/helpers/location.dart';
 import 'package:to_do_project/models/task.dart';
 import 'package:to_do_project/screens/todos.dart';
 import 'package:to_do_project/notification_service.dart';
@@ -33,12 +34,13 @@ class _HomepageState extends State<Homepage> {
           size: 40.0,
           color: Colors.white,
         ),
-        onPressed: () {
+        onPressed: () async{
           CreateTask();
           setState(() {
             futureTask = getTasks();
           });
           NotificationService().showNotifications();
+          await getCityName();
         },
       ),
       body: SafeArea(
