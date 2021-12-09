@@ -17,12 +17,12 @@ void main() async {
   await NotificationService().init();
 
   var cron = new Cron();
-  cron.schedule(new Schedule.parse('0 */1 * * *'), () async {
+  cron.schedule(new Schedule.parse('* * * * *'), () async {
     var activeTaskExist = await ActiveTaskExist();
     if(activeTaskExist) {
-      var city = await getCityName();
-      var temperature = await fetchWeather(city);
-      NotificationService().showNotifications(temperature);
+      var coordinates = await getCoordinates();
+      var temperature = await fetchWeather(coordinates[0], coordinates[1]);
+      NotificationService().showNotifications('$temperature °C');
     }
   });
 

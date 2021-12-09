@@ -61,7 +61,6 @@ class _TaskCardState extends State<TaskCard> {
                     widget.task!.isActive = value ? 1 : 0;
                     setState(() {
                       UpdateTask(widget.task!);
-                      print('calisti');
                     });
                   },
                   activeTrackColor: Color(0xff554cff),

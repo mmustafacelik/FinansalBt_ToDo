@@ -51,3 +51,9 @@ Future<String> getCityName() async {
 
   return placemark[0].administrativeArea!;
 }
+
+Future<List<String>> getCoordinates() async {
+  var position = await determinePosition();
+  var coordinates = [position.latitude.toString(), position.longitude.toString()];
+  return coordinates;
+}

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/widgets/task_card.dart';
 import 'package:to_do_project/helpers/task.dart';
-import 'package:to_do_project/helpers/location.dart';
 import 'package:to_do_project/models/task.dart';
 import 'package:to_do_project/screens/todos.dart';
-
-
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
