@@ -33,7 +33,7 @@ class _TaskCardState extends State<TaskCard> {
             Text(
               widget.task?.title ?? "(İsimsiz Başlık)",
               style: const TextStyle(
-                  color: Color(0xff686868),
+                  color: Color(0xffffffff),
                   fontSize: 20.0,
               ),
               textAlign: TextAlign.center,

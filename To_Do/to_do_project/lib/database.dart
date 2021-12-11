@@ -7,8 +7,8 @@ import 'dart:async';
 class DatabaseHelper {
   late final Future<Database> connection;
 
-  static const tableTask = 'CREATE TABLE tasks(id INTEGER PRIMARY KEY NOT NULL, title TEXT, description TEXT, isActive BOOLEAN NOT NULL CHECK (isActive IN (0,1)))';
-  static const tableTodo = 'CREATE TABLE todos('
+  static const tableTask = 'CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY NOT NULL, title TEXT, description TEXT, isActive BOOLEAN NOT NULL CHECK (isActive IN (0,1)))';
+  static const tableTodo = 'CREATE TABLE IF NOT EXISTS todos('
       'id INTEGER PRIMARY KEY NOT NULL,'
       'title TEXT,'
       'description TEXT,'

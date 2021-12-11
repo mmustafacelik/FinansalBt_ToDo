@@ -72,7 +72,7 @@ class _TodopageState extends State<Todopage> {
                             decoration: InputDecoration(
                               hintText: widget.task?.title,
                               hintStyle: TextStyle(
-                                color: Color(0xff686868),
+                                color: Color(0xffffffff),
                               ),
                               counterText: '',
                             ),
