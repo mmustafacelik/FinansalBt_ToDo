@@ -8,7 +8,30 @@ import 'package:to_do_project/helpers/weather.dart';
 import 'package:to_do_project/helpers/location.dart';
 import 'package:to_do_project/notification_service.dart';
 import 'package:cron/cron.dart';
+import 'package:workmanager/workmanager.dart';
 
+const notificationTaskKey = "notificationTask";
+
+void callbackDispatcher() {
+  try { //add code execution
+    Workmanager().executeTask((task, inputData) async {
+      switch (task) {
+        case notificationTaskKey:
+            var activeTaskExist = await ActiveTaskExist();
+            if(activeTaskExist) {
+              var coordinates = await getCoordinates();
+              var temperature = await fetchWeather(coordinates[0], coordinates[1]);
+              NotificationService().showNotifications('$temperature °C');
+            }
+          break;
+      }
+      // Return whether the job ran successful or not.
+      return Future.value(true);
+    });
+  } catch(err) {
+    print('hata $err');
+  }
+}
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
@@ -16,16 +39,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
 
-  var cron = new Cron();
-  cron.schedule(new Schedule.parse('* * * * *'), () async {
-    var activeTaskExist = await ActiveTaskExist();
-    if(activeTaskExist) {
-      var coordinates = await getCoordinates();
-      var temperature = await fetchWeather(coordinates[0], coordinates[1]);
-      NotificationService().showNotifications('$temperature °C');
-    }
-  });
 
+  Workmanager().initialize(
+      callbackDispatcher, // The top level function, aka callbackDispatcher
+      isInDebugMode: false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+  );
+  Workmanager().registerPeriodicTask("22", notificationTaskKey, frequency: Duration(hours: 3)); //Android only (see below)
 
 
   runApp(const MyApp());

@@ -1,4 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 
 class NotificationService {
@@ -38,9 +40,12 @@ class NotificationService {
     InitializationSettings(
         android: initializationSettingsAndroid);
 
+    tz.initializeTimeZones();  //  <----
+
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
     );
+    return;
   }
 
   Future<void> showNotifications(String temperature) async {
@@ -51,5 +56,17 @@ class NotificationService {
       platformChannelSpecifics,
       payload: 'Notification Payload',
     );
+  }
+
+  Future<void> scheduleNotifications() async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        "Notification Title",
+        "This is the Notification Body!",
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 30)),
+        platformChannelSpecifics,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime);
   }
 }
