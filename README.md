@@ -9,3 +9,4 @@ Eğer bir iş aktifse her üç saatte bir telefonun konumundaki hava sıcaklığ
 - [Test Dökümanı](./test.md)
 - [UX Çalışması](./UX.md)
 - [Veritabanı Dökümanı](./DB.md)
+- [Yazılım Mimari](./mimari.md)
