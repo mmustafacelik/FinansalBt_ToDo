@@ -15,3 +15,5 @@ Enlem ve boylam bilgilerini Flutter'da `geolocator` paketiyle elde ediyoruz.
 Bildirim göndermek içinse `flutter_local_notifications` paketini kullanıyoruz.
 
 Kullanıcının oluşturduğu görevleri ve işlerin kaybolmaması için bu bilgileri SQlite veritabanında uygulama içinde saklıyoruz.
+
+![diagram](./images/diagram.png)
