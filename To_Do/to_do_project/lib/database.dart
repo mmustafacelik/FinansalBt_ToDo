@@ -41,7 +41,7 @@ class DatabaseHelper {
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
-      join(await getDatabasesPath(), 'tasks_databasev26.db'),
+      join(await getDatabasesPath(), 'tasks_databasev27.db'),
       // When the database is first created, create a table to store tasks.
       onConfigure: _onConfigure,
       onCreate: (db, version) async{

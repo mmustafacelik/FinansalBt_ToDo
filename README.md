@@ -1,5 +1,7 @@
 # Finansal Bilgi Teknolojileri Proje Ödevi
 
+[YouTube](https://www.youtube.com/watch?v=Qj86TL5UsUs)
+
 Bu ödevde kullanıcıların yapmayı planladıkları işleri ekleyebileceği bir mobil uygulamadır. 
 Kullanıcılar işleri alt işlere ayırabilir. 
 
