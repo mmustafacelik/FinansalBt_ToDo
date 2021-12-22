@@ -5,8 +5,8 @@ Kullanıcılar işleri alt işlere ayırabilir.
 
 Eğer bir iş aktifse her üç saatte bir telefonun konumundaki hava sıcaklığı kullanıcıya bildirim olarak gönderilir.
 
-- [Analiz Dökümanı](./analiz.md)
-- [Test Dökümanı](./test.md)
+- [Analiz Dökümanı](./Analiz.md)
+- [Test Dökümanı](./Test.md)
 - [UX Çalışması](./UX.md)
 - [Veritabanı Dökümanı](./DB.md)
-- [Yazılım Mimari](./mimari.md)
+- [Yazılım Mimari](./Mimari.md)
